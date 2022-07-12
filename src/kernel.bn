@@ -1,0 +1,14 @@
+func print(str){
+  int* vd_addr = 753664; # 0xb8000
+  char* vd_mem = vd_addr; 
+  i = 0;
+  m = 0;
+  while str[i] != '\0' {
+    vd_mem[m] = str[i];
+    vd_mem[m+1] = 10; # green colour (0a)
+    m = m + 2;
+    i = i + 1;
+  }
+}
+
+print("Welcome to lebuOS");
