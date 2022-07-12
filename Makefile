@@ -1,7 +1,10 @@
 LEBU = lebu
+CC = x86_64-elf-gcc
+LD = x86_64-elf-ld
+
 LEBU_FLAGS = -c -w -nobase -noio
-CC = x86_64-elf-gcc -m32 -ffreestanding -fno-pie -nostdinc -w -c
-LD = x86_64-elf-ld -m elf_i386
+CC_FLAGS = -m32 -ffreestanding -fno-pie -nostdinc -w -c
+LD_FLAGS = -m elf_i386
 
 SRC = $(wildcard src/*.bn)
 CSRC = $(wildcard src/*.c)
@@ -15,10 +18,10 @@ os.bin: kernel.bin boot.bin
 	$(LEBU) $^ $(LEBU_FLAGS) -o $@
 
 %.o: %.c
-	$(CC) -o $@ -c $^
+	$(CC) $(CC_FLAGS) -o $@ -c $^
 
 kernel.bin: start.o $(OBJ)
-	$(LD) -Ttext 0x1000 --oformat binary $^ -o $@
+	$(LD) $(LD_FLAGS) -Ttext 0x1000 --oformat binary $^ -o $@
 
 start.o:
 	nasm -f elf src/start.asm -o $@
@@ -31,4 +34,3 @@ run: os.bin
 
 clean:
 	rm src/*.o *.bin *.o
-
