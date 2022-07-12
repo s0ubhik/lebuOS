@@ -1,5 +1,5 @@
 LEBU = lebu
-LEBU_FLAGS = -p -w -nobase -noio
+LEBU_FLAGS = -c -w -nobase -noio
 CC = x86_64-elf-gcc -m32 -ffreestanding -fno-pie -nostdinc -w -c
 LD = x86_64-elf-ld -m elf_i386
 
